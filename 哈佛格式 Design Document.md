@@ -70,34 +70,13 @@ the `Favorites` table includes:
 ### Relationships
 
 The entity relationship diagram and the relationships between the entities in my database will show as a image which is cs50-sql-finalproject-fitness-diagram-2024-12-02-151814.png.
-    ![ER Diagram](diagram.png)
-
-很多個會員可以在不同地方同時看一部影片，但一個會員一次只能看一部影片(many to one relationship)
-一個會員可以有很多個我的最愛 (one to many relationship)
-有很多不同的影片，但一部影片只會有一個運動難度 (many to one relationship)
-OR 一部影片只會有一個運動難度，但一個運動難度可以包含很多部影片 (one to many relationship)
-一個會員可以有很多個不同的里程碑 (one to many relationship)
+    ![ER Diagram](cs50-sql-finalproject-fitness-diagram-2024-12-02-151814.png)
 
 Descriptions:
 * There can be many members watch one exercise video at the same time in different places,but one member can watch one exercise video at a time.(Many to one relationship)
 * A member can have many Favorites.(One to many relationship)
 * One exercise video only have one exercise level,but one exercise level have many exercise videos.(One to many relationship)
 * There can be many milestones for one member.(Many to one relationship)
-
-* There can be more than one store in a city, but the same store cannot be in many cities.(one-to-many relationship)
-*  There can be more than one employee in a store, but an employee cannot work in more than one store at the same time.(one-to-many relationship)
-*  Multiple orders can be placed from one store, but two stores cannot be included in the same order.(one-to-many relationship)
-*  There can be more than one employee in a department, but the same employee cannot be in two departments.(one-to-many relationship)
-  There may be more than one employee in a job position, but the same employee cannot be in two job positions.(one-to-many relationship)
-  The employee has a compensation, the same compensation represents the one employee. (One to one relationship)
-  An employee can take leave at different times, but the same leave cannot represent more than one employee.(one-to-many relationship)
-  A customer can place more than one order, but the same order cannot represent two customers.(one-to-many relationship)
-  An employee can create multiple orders but one order cannot represent two employees.(one-to-many relationship)
-  There can be multiple items in one order, but the items cannot represent two identical orders.(one-to-many relationship)
-  A product can be in more than one order product table, but the order product id represents the same product only once. (one-to-many relationship)
-  There can be multiple items in one order and one item can be in multiple orders.(many-to-many relationship)
-  There can be more than one product in a category, but a product cannot be in 2 categories.(one-to-many relationship)
-  A product has one brand, but the same brand may have multiple products.(one-to-many relationship)
 
 ## Optimizations
 
