@@ -11,16 +11,16 @@ FROM "Exercise_videos" AS ev
 JOIN "Exercise_levels" AS el
 ON el.id = ev.level_id;
 
---  Count how many projects do a member have.
-Select
+--  Count how many Favorites do a member have.
+SELECT
 	m.id,
 	m.account,
-	count(p.members_id) As bookmark_number
-From "Projects" As p
-Left Join "Members" As m
+	count(p.members_id) AS bookmark_number
+FROM "Favorites" AS p
+LEFT Join "Members" AS m
 ON p.members_id = m.id
-Group By m.id,m.account
-Order By m.id ASC;
+GROUP BY m.id,m.account
+ORDER BY m.id ASC;
 
 -- Insert Members.
 INSERT INTO "Members" (id,account,email,birth,height,weight) VALUES
@@ -41,32 +41,32 @@ INSERT INTO "Exercise_levels" (id,level) VALUES
 -- Insert Members_milestones.
 WITH c AS (
 	SELECT
-		m.id As m_id,m.account,
-		case
-			when
-				count(mh.members_id) >= 3 and count(mh.members_id) < 4
-				then 1
-			when
-				count(mh.members_id) >= 4 and count(mh.members_id) < 5
-				then 3
-			when
-				count(mh.members_id) >= 5 and count(mh.members_id) < 6
-				then 2
-			when
-				count(mh.members_id) >= 6 and count(mh.members_id) < 7
-				then 4
-			when
+		m.id AS m_id,m.account,
+		CASE
+			WHEN
+				count(mh.members_id) >= 3 AND count(mh.members_id) < 4
+				THEN 1
+			WHEN
+				count(mh.members_id) >= 4 AND count(mh.members_id) < 5
+				THEN 3
+			WHEN
+				count(mh.members_id) >= 5 AND count(mh.members_id) < 6
+				THEN 2
+			WHEN
+				count(mh.members_id) >= 6 AND count(mh.members_id) < 7
+				THEN 4
+			WHEN
 				count(mh.members_id) >= 7
-				then 5
-		end as milestones_id
-	FROM "Members" as m
-		LEFT JOIN member_history as mh
+				THEN 5
+		END AS milestones_id
+	FROM "Members" AS m
+		LEFT JOIN member_history AS mh
 			ON m.id = mh.members_id
 			WHERE mh.watch_at >= NOW() - INTERVAL '7 DAYS'
 	GROUP BY m.id
 )
-Insert Into "Members_milestones" (members_id,milestones_id)
-select m_id,milestones_id from c where c.milestones_id is not null;
+INSERT INTO "Members_milestones" (members_id,milestones_id)
+SELECT m_id,milestones_id FROM c WHERE c.milestones_id IS NOT NULL;
 
 
 -- Insert Exercise_videos.
@@ -75,8 +75,8 @@ INSERT INTO "Exercise_videos" (id,title,url,level_id) VALUES
 (3,'30 minutes workout','https://www.youtube.com/watch?v=RJRITGJ4dgrip2w6',3),(4,'10 minutes workout','https://www.youtube.com/watch?v=ntHn9RfP_RJRITGJ4dgrip2w6',2),
 (5,'10 Minute Ab Workout','https://www.youtube.com/watch?v=IrA9dvJ4dgrip2w6',3);
 
--- Insert Projects.
-INSERT INTO "Projects" (id,members_id,videos_id,date) VALUES
+-- Insert Favorites.
+INSERT INTO "Favorites" (id,members_id,videos_id,date) VALUES
 (1,2,1,now()),(2,2,4,now()),(3,2,5,now()),(4,3,1,now()),(5,2,4,now()),(6,2,1,now());
 
 
@@ -84,7 +84,7 @@ INSERT INTO "Projects" (id,members_id,videos_id,date) VALUES
 UPDATE "Members" SET weight = 65 WHERE id = 2;
 
 -- Update watch_status and date when member have seen the project.
-UPDATE "Projects" SET watch_status = 1 ,date = now() WHERE id = 4;
+UPDATE "Favorites" SET watch_status = 1 ,date = now() WHERE id = 4;
 
 --- Delete from table where id = ?
 DELETE FROM "Exercise_videos" WHERE id = 2;
