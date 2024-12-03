@@ -71,7 +71,7 @@ the `Favorites` table includes:
 ### Relationships
 
 The entity relationship diagram and the relationships between the entities in my database will shown on the image below.
-    ![ER Diagram](cs50-sql-finalproject-fitness-diagram-2024-12-03-094744.png)
+    ![ER Diagram](fitness-diagram.png)
 
 Descriptions:
 * There can be many members watch one exercise video at the same time in different places,but one member can watch one exercise video at a time.(Many to one relationship)

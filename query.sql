@@ -1,27 +1,3 @@
--- Show members whose height > 170.
-SELECT * FROM "Members" WHERE height > 170;
--- Show all informations whose account is 'example_member2'.
-SELECT * FROM "Members" WHERE account = 'example_member2';
-
--- Use join to combine 2 tables,based on Exercise_levels' id and Exercise_videos' id.
--- Show title,path of Exercise_videos and level of Exercise_levels.
-SELECT
-	ev.title,ev.url,el.level
-FROM "Exercise_videos" AS ev
-JOIN "Exercise_levels" AS el
-ON el.id = ev.level_id;
-
---  Count how many Favorites do a member have.
-SELECT
-	m.id,
-	m.account,
-	count(p.members_id) AS bookmark_number
-FROM "Favorites" AS p
-LEFT Join "Members" AS m
-ON p.members_id = m.id
-GROUP BY m.id,m.account
-ORDER BY m.id ASC;
-
 -- Insert Members.
 INSERT INTO "Members" (id,account,email,birth,height,weight) VALUES
 (1,'example_member1','eg1email@mail.com','1982-12-01',162.5,42),
@@ -79,6 +55,54 @@ INSERT INTO "Exercise_videos" (id,title,url,level_id) VALUES
 INSERT INTO "Favorites" (id,members_id,videos_id,date) VALUES
 (1,2,1,now()),(2,2,4,now()),(3,2,5,now()),(4,3,1,now()),(5,2,4,now()),(6,2,1,now());
 
+-- Show members whose height > 170.
+SELECT * FROM "Members" WHERE height > 170;
+-- Show all informations whose account is 'example_member2'.
+SELECT * FROM "Members" WHERE account = 'example_member2';
+
+-- Use join to combine 2 tables,based on Exercise_levels' id and Exercise_videos' id.
+-- Show title,path of Exercise_videos and level of Exercise_levels.
+SELECT
+	ev.title,ev.url,el.level
+FROM "Exercise_videos" AS ev
+JOIN "Exercise_levels" AS el
+ON el.id = ev.level_id;
+
+--  Count how many Favorites do a member have.
+SELECT
+	m.id,
+	m.account,
+	count(fav.members_id) AS bookmark_number
+FROM "Favorites" AS fav
+LEFT JOIN "Members" AS m
+ON fav.members_id = m.id
+GROUP BY m.id,m.account
+ORDER BY m.id ASC;
+
+--- Show account and what milestones do members have.
+SELECT
+	m.id AS m_id,
+	m.account,
+	m2.frequency AS exercise_frequency,
+	m2.milestones_name
+FROM "Members_milestones" AS m1
+JOIN "Members" AS m
+ON m.id = m1.members_id
+JOIN "Milestones" AS m2
+ON m2.id = m1.milestones_id;
+
+--- How many times do members exercise in last 7 days.
+WITH c AS (
+	SELECT
+		m.id AS m_id,m.account,
+		count(mh.members_id) AS exercise_frequency
+	FROM "Members" AS m
+		LEFT JOIN member_history AS mh
+			ON m.id = mh.members_id
+			WHERE mh.watch_at >= NOW() - INTERVAL '7 DAYS'
+	GROUP BY m.id
+)
+SELECT m_id,account,exercise_frequency FROM c;
 
 --- Update weight of member whose id is 2.
 UPDATE "Members" SET weight = 65 WHERE id = 2;
