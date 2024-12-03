@@ -82,7 +82,7 @@ Descriptions:
 ## Optimizations
 
 View: <br>
-`member_history` to record what a member had done before.
+`member_history` to record what a member had done before.<br>
 Index: <br>
 `account`,`email` on table `Members`,`title` on table `Exercise_videos` and `milestones_name` on table `Milestones`.
 Because some columns are unique,text or pk,it will be more effective than no index when execute SQL.
