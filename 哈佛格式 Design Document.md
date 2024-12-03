@@ -7,7 +7,7 @@ Video overview: <URL HERE>
 ## Purpose
 This database is design for people who want to exercise for healthy or keep good shape of their body.
 
-**In Scope**
+**In Scope**<br>
 Do some exercise at home and don't need professional equipments.
 * Members: This table is to record member information, including account, birthday, email, height and weight.
 * Exercises_levels: This table has different type of exercise intensity.There're 3 types of levels,like "easy","mid" and "hard".
@@ -16,7 +16,7 @@ Do some exercise at home and don't need professional equipments.
 * Members_milestones: This table is to record a member times of exercise.
 * Milestones: This table is to record different times of exercise.
 
-**Out of Scope**
+**Out of Scope**<br>
 Eat a lot or lazy in life.
 
 ## Scope
@@ -38,12 +38,13 @@ the `Members` table includes:
 * `account` is a `unique` `varchar` to represent the member account of the database.
 * `email` which is a `unique` `varchar` to get more information.
 * `birth` is type of `varchar`,which mean the member's birthday,to know their ages.
-* `height` is type of `varchar`,whichis to get more suitable exercise plan for the member,need height,weight and age to accurate of calories and exercise volume.
-* `weight` is type of `varchar`,whichis to get more suitable exercise plan for the member,need height,weight and age to accurate of calories and exercise volume.
+* `height` is type of `varchar`,which is to get more suitable exercise plan for the member,need height,weight and age to accurate of calories and exercise volume.
+* `weight` is type of `varchar`,which is to get more suitable exercise plan for the member,need height,weight and age to accurate of calories and exercise volume.
 #### Milestones:
 the `Milestones` table includes:
 * `id` which is a `Primary Key`,`unique` number assigned to each row of data.
 * `milestones_name` is type of `varchar`,which is a column defined as enum,values such as "exercise 3 times a week","exercise 5 times a week".
+* `frequency` is type of `int`,to get the exercise times.
 #### Members_milestones:
 the `Member_milestones` table includes:
 * `id` which is a `Primary Key`,`unique` number assigned to each row of data.
@@ -69,7 +70,7 @@ the `Favorites` table includes:
 
 ### Relationships
 
-The entity relationship diagram and the relationships between the entities in my database will show as a image which is cs50-sql-finalproject-fitness-diagram-2024-12-02-151814.png.
+The entity relationship diagram and the relationships between the entities in my database will shown on the image below.
     ![ER Diagram](cs50-sql-finalproject-fitness-diagram-2024-12-02-151814.png)
 
 Descriptions:
@@ -80,13 +81,13 @@ Descriptions:
 
 ## Optimizations
 
-View:
+View: <br>
 `member_history` to record what a member had done before.
-Index:
+Index: <br>
 `account`,`email` on table `Members`,`title` on table `Exercise_videos` and `milestones_name` on table `Milestones`.
 Because some columns are unique,text or pk,it will be more effective than no index when execute SQL.
 
 ## Limitations
 
-Can't customize a training project.
+Can't customize a training project. <br>
 Can't get precise data through "watch" exercise videos.The database can't get the condition of user.Such as it can't calculate how many calories a user burn.

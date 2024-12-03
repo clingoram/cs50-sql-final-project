@@ -1,6 +1,6 @@
 -- Show members whose height > 170.
 SELECT * FROM "Members" WHERE height > 170;
--- Show all informations where account is 'example_member2'.
+-- Show all informations whose account is 'example_member2'.
 SELECT * FROM "Members" WHERE account = 'example_member2';
 
 -- Use join to combine 2 tables,based on Exercise_levels' id and Exercise_videos' id.
