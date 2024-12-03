@@ -4,7 +4,7 @@ SELECT * FROM "Members" WHERE height > 170;
 SELECT * FROM "Members" WHERE account = 'example_member2';
 
 -- Use join to combine 2 tables,based on Exercise_levels' id and Exercise_videos' id.
--- Show title,path of Exercise_videos and level of Exercise_levels
+-- Show title,path of Exercise_videos and level of Exercise_levels.
 SELECT
 	ev.title,ev.url,el.level
 FROM "Exercise_videos" AS ev
@@ -84,7 +84,6 @@ INSERT INTO "Projects" (id,members_id,videos_id,date) VALUES
 UPDATE "Members" SET weight = 65 WHERE id = 2;
 
 -- Update watch_status and date when member have seen the project.
--- It'll change data in view (member_history).
 UPDATE "Projects" SET watch_status = 1 ,date = now() WHERE id = 4;
 
 --- Delete from table where id = ?
