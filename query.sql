@@ -11,8 +11,7 @@ INSERT INTO "Milestones" (id,milestones_name,frequency) VALUES
 (4,'6 times a week',6),(5,'7 times a week',7);
 
 -- Insert Exercise_levels.
-INSERT INTO "Exercise_levels" (id,level) VALUES
-(1,'Easy'),(2,'Mid'),(3,'Hard');
+INSERT INTO "Exercise_levels" (id,level) VALUES (1,'Easy'),(2,'Mid'),(3,'Hard');
 
 -- Insert Members_milestones.
 WITH c AS (
@@ -38,7 +37,7 @@ WITH c AS (
 	FROM "Members" AS m
 		LEFT JOIN member_history AS mh
 			ON m.id = mh.members_id
-			WHERE mh.watch_at >= NOW() - INTERVAL '7 DAYS'
+			WHERE mh.watch_at >= datetime('now' , '-7 days')
 	GROUP BY m.id
 )
 INSERT INTO "Members_milestones" (members_id,milestones_id)
@@ -52,8 +51,7 @@ INSERT INTO "Exercise_videos" (id,title,url,level_id) VALUES
 (5,'10 Minute Ab Workout','https://www.youtube.com/watch?v=IrA9dvJ4dgrip2w6',3);
 
 -- Insert Favorites.
-INSERT INTO "Favorites" (id,members_id,videos_id,date) VALUES
-(1,2,1,now()),(2,2,4,now()),(3,2,5,now()),(4,3,1,now()),(5,2,4,now()),(6,2,1,now());
+INSERT INTO "Favorites" (id,members_id,videos_id,date) VALUES (1,2,1,datetime()),(2,2,4,datetime()),(3,2,5,datetime()),(4,3,1,datetime()),(5,2,4,datetime()),(6,2,1,datetime());
 
 -- Show members whose height > 170.
 SELECT * FROM "Members" WHERE height > 170;
@@ -62,11 +60,8 @@ SELECT * FROM "Members" WHERE account = 'example_member2';
 
 -- Use join to combine 2 tables,based on Exercise_levels' id and Exercise_videos' id.
 -- Show title,path of Exercise_videos and level of Exercise_levels.
-SELECT
-	ev.title,ev.url,el.level
-FROM "Exercise_videos" AS ev
-JOIN "Exercise_levels" AS el
-ON el.id = ev.level_id;
+SELECT ev.title,ev.url,el.level FROM "Exercise_videos" AS ev
+JOIN "Exercise_levels" AS el ON el.id = ev.level_id;
 
 --  Count how many Favorites do a member have.
 SELECT
@@ -99,7 +94,7 @@ WITH c AS (
 	FROM "Members" AS m
 		LEFT JOIN member_history AS mh
 			ON m.id = mh.members_id
-			WHERE mh.watch_at >= NOW() - INTERVAL '7 DAYS'
+			WHERE mh.watch_at >= datetime('now' , '-7 days')
 	GROUP BY m.id
 )
 SELECT m_id,account,exercise_frequency FROM c;
@@ -107,8 +102,8 @@ SELECT m_id,account,exercise_frequency FROM c;
 --- Update weight of member whose id is 2.
 UPDATE "Members" SET weight = 65 WHERE id = 2;
 
--- Update watch_status and date when member have seen the project.
-UPDATE "Favorites" SET watch_status = 1 ,date = now() WHERE id = 4;
+-- Update watch_status and date when member have seen.
+UPDATE "Favorites" SET watch_status = 1 ,date = datetime() WHERE id = 4;
 
 --- Delete from table where id = ?
 DELETE FROM "Exercise_videos" WHERE id = 2;
