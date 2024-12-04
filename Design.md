@@ -2,7 +2,7 @@
 
 By Mavis Lai
 
-Video overview: <[](https://youtu.be/sUscNpuInfA)>
+Video overview: <https://youtu.be/sUscNpuInfA>
 
 ## Purpose
 This database is design for people who want to exercise for healthy or keep good shape of their body.
