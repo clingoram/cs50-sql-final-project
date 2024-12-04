@@ -46,7 +46,7 @@ the `Milestones` table includes:
 * `milestones_name` is type of `varchar`,which is a column defined as enum,values such as "exercise 3 times a week","exercise 5 times a week".
 * `frequency` is type of `int`,to get the exercise times.
 #### Members_milestones:
-the `Member_milestones` table includes:
+the `Members_milestones` table includes:
 * `id` which is a `Primary Key`,`unique` number assigned to each row of data.
 * `members_id` is `FOREIGN KEY` which refers to the `PRIMARY KEY` in `Members` table.
 * `milestones_id` is `FOREIGN KEY` which refers to the `PRIMARY KEY` in `Milestones` table.In order to make members to know how frequently they do exercise.
@@ -59,6 +59,7 @@ the `Exercise_levels` table includes:
 the `Exercise_videos` table includes:
 * `id` which is a `Primary Key`,`unique` number assigned to each row of data.
 * `url` which is `text` to store the video url.
+* `title` which is `text` to store the title of video.
 * `level_id` is `FOREIGN KEY` which refers to the `PRIMARY KEY` in `Exercise_levels` table.
 #### Favorites:
 the `Favorites` table includes:
